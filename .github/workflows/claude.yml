@@ -59,5 +59,8 @@ jobs:
             }
           allowed_tools: "Read,Edit,Write,Glob,Grep,Bash(npm:*),Bash(npx:*),Bash(sqlite3:*),Bash(cat:*),Bash(ls:*),mcp__playwright_browser_snapshot,mcp__playwright_browser_click,mcp__playwright_browser_type,mcp__playwright_browser_navigate,mcp__playwright_browser_wait_for"
         env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
-          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+          ANTHROPIC_DEFAULT_OPUS_MODEL: glm-5
+          ANTHROPIC_DEFAULT_SONNET_MODEL: glm-4.7
+          ANTHROPIC_DEFAULT_HAIKU_MODEL: glm-4.5-air
