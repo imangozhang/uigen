@@ -65,10 +65,10 @@ test("MessageList renders messages with parts", () => {
           type: "tool-invocation",
           toolInvocation: {
             toolCallId: "asdf",
-            args: {},
+            args: { command: "create", path: "src/Button.tsx" },
             toolName: "str_replace_editor",
             state: "result",
-            result: "Success",
+            result: { success: true },
           },
         },
       ],
@@ -78,7 +78,47 @@ test("MessageList renders messages with parts", () => {
   render(<MessageList messages={messages} />);
 
   expect(screen.getByText("Creating your component...")).toBeDefined();
-  expect(screen.getByText("str_replace_editor")).toBeDefined();
+  // Now displays friendly text instead of raw tool name
+  expect(screen.getByText("Creating: src/Button.tsx")).toBeDefined();
+});
+
+test("MessageList shows all tool invocations when multiple exist", () => {
+  const messages: Message[] = [
+    {
+      id: "1",
+      role: "assistant",
+      content: "",
+      parts: [
+        { type: "text", text: "Working on your component..." },
+        {
+          type: "tool-invocation",
+          toolInvocation: {
+            toolCallId: "tool1",
+            args: { command: "create", path: "src/Button.tsx" },
+            toolName: "str_replace_editor",
+            state: "result",
+            result: { success: true },
+          },
+        },
+        {
+          type: "tool-invocation",
+          toolInvocation: {
+            toolCallId: "tool2",
+            args: { command: "str_replace", path: "src/App.tsx" },
+            toolName: "str_replace_editor",
+            state: "result",
+            result: { success: true },
+          },
+        },
+      ],
+    },
+  ];
+
+  render(<MessageList messages={messages} />);
+
+  // Should show all tool invocations
+  expect(screen.getByText("Creating: src/Button.tsx")).toBeDefined();
+  expect(screen.getByText("Editing: src/App.tsx")).toBeDefined();
 });
 
 test("MessageList shows content for assistant message with content", () => {
