@@ -43,20 +43,20 @@ jobs:
             Logs from it are begin written to logs.txt.
             If needed, you can query the db with the 'sqlite3' cli.
             If needed, use the mcp__playwright set of tools to launch a browser and interact with the app.
+          mcp_config: |
+            {
+              "mcpServers": {
+                "playwright": {
+                  "command": "npx",
+                  "args": [
+                    "@playwright/mcp@latest",
+                    "--allowed-origins",
+                    "localhost:3000;cdn.tailwindcss.com;ems.sh"
+                  ]
+                }
+              }
+            }
+          allowed_tools: "Read,Edit,Write,Glob,Grep,Bash(npm:*),Bash(npx:*),Bash(sqlite3:*),Bash(cat:*),Bash(ls:*),mcp__playwright_browser_snapshot,mcp__playwright_browser_click,mcp__playwright_browser_type,mcp__playwright_browser_navigate,mcp__playwright_browser_wait_for"
         env:
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
           ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
-        mcp_config: |
-          {
-            "mcpServers": {
-              "playwright": {
-                "command": "npx",
-                "args": [
-                  "@playwright/mcp@latest",
-                  "--allowed-origins",
-                  "localhost:3000;cdn.tailwindcss.com;ems.sh"
-                ]
-              }
-            }
-          }
-        allowed_tools: "Read,Edit,Write,Glob,Grep,Bash(npm:*),Bash(npx:*),Bash(sqlite3:*),Bash(cat:*),Bash(ls:*),mcp__playwright_browser_snapshot,mcp__playwright_browser_click,mcp__playwright_browser_type,mcp__playwright_browser_navigate,mcp__playwright_browser_wait_for"
