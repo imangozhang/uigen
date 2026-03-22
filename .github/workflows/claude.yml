@@ -1,4 +1,4 @@
-name: Claude
+name: Claude  # Claude Code Action - 由 @claude 触发
 
 on:
   issue_comment:
@@ -39,11 +39,11 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           custom_instructions: |
-            The project is already set up with all dependencies installed.
-            The server is already running at localhost:3000.
-            Logs from it are begin written to logs.txt.
-            If needed, you can query the db with the 'sqlite3' cli.
-            If needed, use the mcp__playwright set of tools to launch a browser and interact with the app.
+            项目已完成设置，所有依赖已安装。
+            开发服务器已在 localhost:3000 运行。
+            服务器日志写入 logs.txt 文件。
+            如需查询数据库，可使用 sqlite3 命令行工具。
+            如需操作浏览器，可使用 mcp__playwright 系列工具。
           mcp_config: |
             {
               "mcpServers": {

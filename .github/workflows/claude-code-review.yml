@@ -48,7 +48,7 @@ jobs:
 
             使用 `gh pr comment` 命令在 PR 上发表评论。
           claude_args: |
-            --allowedTools "Read,Glob,Grep,Bash(gh pr comment:*)"
+            --allowedTools "Read,Glob,Grep,Bash(gh:*)"
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
