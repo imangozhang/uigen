@@ -10,6 +10,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,6 +29,9 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
             请审查这个 Pull Request 的变更。
 
             变更的文件：
@@ -41,6 +45,13 @@ jobs:
             5. **变更影响**：分析这些变更对现有功能的影响
 
             请用中文回复，并给出具体的改进建议。
+
+            使用 `gh pr comment` 命令在 PR 上发表评论。
+          claude_args: |
+            --allowedTools "Read,Glob,Grep,Bash(gh:*)"
         env:
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
-          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+          ANTHROPIC_DEFAULT_OPUS_MODEL: glm-5
+          ANTHROPIC_DEFAULT_SONNET_MODEL: glm-4.7
+          ANTHROPIC_DEFAULT_HAIKU_MODEL: glm-4.5-air
