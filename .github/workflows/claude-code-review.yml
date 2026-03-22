@@ -42,6 +42,7 @@ jobs:
             5. **变更影响**：分析这些变更对现有功能的影响
 
             请用中文回复，并给出具体的改进建议。
+          allowed_tools: "Read,Glob,Grep,mcp__github_comment__update_claude_comment"
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
