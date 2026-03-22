@@ -1,4 +1,4 @@
-name: Claude
+name: Claude  # Claude Code Action - 由 @claude 触发
 
 on:
   issue_comment:
