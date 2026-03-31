@@ -1,3 +1,34 @@
+// BAD CODE - For testing code review workflow only
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const x = 1;
+const bad_name = "test"; // 命名不规范
+
+// 安全问题：使用 eval
+function unsafeEval(userInput: string) {
+  return eval(userInput); // XSS 风险
+}
+
+// 性能问题：循环中创建函数
+function badPerformance(items: string[]) {
+  const results: (() => string)[] = [];
+  for (let i = 0; i < items.length; i++) {
+    results.push(() => items[i].toUpperCase()); // 每次循环都创建新函数
+  }
+  return results;
+}
+
+// 新增测试代码 - 更多问题
+var globalVar = "avoid var"; // 应该使用 const/let
+function SQLInjection(userId: string) {
+  const query = "SELECT * FROM users WHERE id = " + userId; // SQL 注入风险
+  return query;
+}
+// TODO: 这个函数没有错误处理
+async function fetchData(url) { // 缺少类型注解
+  const response = await fetch(url);
+  return response.json();
+}
+
 export const generationPrompt = `
 You are a software engineer tasked with assembling React components.
 
